@@ -1,31 +1,29 @@
-import setuptools, sys
+import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-import irrep
-
 setuptools.setup(
     name="irrep",
-    version=irrep.__version__,
     author="Stepan S. Tsirkin",
-    author_email="stepan.tsirkin@uzh.ch",
+    author_email="stepan.tsirkin@ehu.eus",
     description="A tool to get symmetry proberties of ab-initio wavefunctions, irreduible representations and more.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     install_requires=[
         "numpy",
         "scipy>=1.0",
-        "spglib>=1.14",
-        "lazy_property",
+        "spglib>=2.5.0",
         "Click",
         "monty",
         "ruamel.yaml",
-        "irreptables",
-        "fortio"
+        "irreptables>=2.0",
+        "fortio",
+        "packaging",
+        "h5py",
     ],
-    include_package_data=False,
-    url="https://github.com/stepan-tsirkin/irrep",
+    include_package_data=True,
+    url="https://github.com/irreducible-representations/irrep.git",
     packages=["irrep"],
     classifiers=[
         "Programming Language :: Python :: 3",

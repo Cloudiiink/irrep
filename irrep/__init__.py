@@ -1,2 +1,1 @@
-from .__version import __version__
-#from .bandstructure import BandStructure
+__version__ = "2.4.1"
