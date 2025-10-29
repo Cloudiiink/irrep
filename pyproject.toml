@@ -1,0 +1,124 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "irrep"
+version = "2.4.1"
+description = "A tool to get symmetry properties of ab-initio wavefunctions, irreducible representations and more."
+readme = "README.md"
+license = {text = "GPL-3.0"}
+authors = [
+    {name = "Stepan S. Tsirkin", email = "stepan.tsirkin@ehu.eus"}
+]
+maintainers = [
+    {name = "Stepan S. Tsirkin", email = "stepan.tsirkin@ehu.eus"}
+]
+keywords = ["symmetry", "irreducible-representations", "DFT", "band-structure", "topology", "materials-science"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "scipy>=1.0",
+    "spglib>=2.5.0",
+    "Click",
+    "monty",
+    "ruamel.yaml",
+    "irreptables>=2.0",
+    "fortio",
+    "packaging",
+    "h5py",
+]
+
+[project.urls]
+Homepage = "https://github.com/irreducible-representations/irrep"
+Repository = "https://github.com/irreducible-representations/irrep.git"
+Documentation = "https://github.com/irreducible-representations/irrep"
+"Bug Tracker" = "https://github.com/irreducible-representations/irrep/issues"
+
+[project.entry-points."console_scripts"]
+irrep = "irrep.cli:cli"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=6.0",
+    "gpaw",
+]
+dev = [
+    "pytest>=6.0",
+    "gpaw",
+    "flake8",
+    "yapf",
+]
+all = [
+    "pytest>=6.0",
+    "gpaw",
+    "flake8",
+    "yapf",
+]
+
+[tool.setuptools]
+include-package-data = true
+packages = ["irrep"]
+
+[tool.setuptools.package-data]
+irrep = ["data/*", "data/EBRs/*", "data/symmetry_tables/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["irrep/tests"]
+pythonpath = [".", "irreptables"]
+addopts = "--color=yes"
+
+[tool.flake8]
+ignore = [
+    "E123",  # closing bracket does not match indentation of opening bracket's line
+    "E126",  # continuation line over-indented for hanging indent
+    "E201",  # whitespace after '['
+    "E266",  # too many leading '#' for block comment
+    "E741",  # ambiguous variable name
+    "W504",  # line break after binary operator
+    "E303",  # too many blank lines
+    "E731",  # do not assign a lambda expression, use a def
+    "E721",  # do not compare types
+    "E501",  # line too long
+    "E272",  # multiple spaces before keyword
+    "E124",  # closing bracket does not match visual indentation
+    "E128",  # continuation line under-indented for visual indent
+    "W291",  # trailing whitespace
+    "W293",  # blank line contains whitespace
+    "W503",  # line break before binary operator
+    "W605",  # invalid escape sequence - does not allow to use LaTeX
+]
+exclude = [".git", "__pycache__", "build", "dist", ".eggs", "*.egg", ".conda"]
+max-line-length = 120
+per-file-ignores = ["conftest.py:F401"]
+
+[tool.yapf]
+based_on_style = "pep8"
+column_limit = 120
+indent_width = 4
+split_before_logical_operator = true
+split_before_first_argument = true
+split_before_arithmetic_operator = true
+
+[tool.irreptables]
+# Subproject configuration for irreptables
+name = "irreptables"
+version = "2.0.0"
+description = "Tables of characters of irreducible representations for double space groups"
+dependencies = [
+    "numpy",
+    "scipy>=1.0",
+    "spglib>=1.14",
+    "Click",
+]

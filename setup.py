@@ -30,8 +30,9 @@ setuptools.setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
-    entry_points="""
-        [console_scripts]
-        irrep=irrep.cli:cli
-    """,
+    # entry_points moved to pyproject.toml (PEP 621). Keep `setup.py` minimal to avoid setuptools parsing `entry_points` as a plain string during build.
+    # entry_points="""
+    #     [console_scripts]
+    #     irrep=irrep.cli:cli
+    # """,
 )
